@@ -1,0 +1,127 @@
+:root {
+  --pink-bg: rgb(255, 103, 108);
+  --white-bg: rgb(242, 242, 242);
+
+  font-size: 19px;
+  font-family: "Roboto", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  background: linear-gradient(
+    to top,
+    rgb(255, 103, 108) 50%,
+    rgb(242, 242, 242) 50%
+  );
+}
+
+h1,
+h2 {
+  color: rgb(255, 103, 108);
+
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 3rem;
+}
+h1 {
+  margin-top: 20px;
+}
+h2 {
+  margin-top: 10px;
+}
+
+#root {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.actor-card {
+  width: 300px;
+  height: 350px;
+  border-radius: 5%;
+  box-shadow: 0px 10px 15px 10px #adadad37;
+  margin: 15px;
+
+  background-color: white;
+
+  list-style-type: none;
+}
+
+h3 {
+  font-weight: 300;
+}
+.section-choose {
+  width: 700px;
+  border: rgb(255, 103, 108) solid 5px;
+  margin: 20px auto;
+
+  background-color: white;
+}
+
+.div-photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin: 30px auto;
+
+  position: relative;
+  background-color: #ff676c;
+}
+.actor-photo,
+.actor-initials {
+  width: 95%;
+  height: 95%;
+  border-radius: 50%;
+  border: rgb(242, 242, 242) solid 4px;
+
+  position: absolute;
+  top: 4px;
+  left: 4px;
+}
+.actor-photo {
+  object-fit: cover;
+  object-position: top;
+}
+.actor-initials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 0;
+  color: white;
+  font-size: 3rem;
+}
+.link-socials {
+  width: 40px;
+  height: 40px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.div-link-socials {
+  margin-top: 50px;
+  text-align: center;
+}
+.li-like-actor {
+  margin: 10px;
+  
+  color: #ff676c;
+  list-style-type: none;
+  text-align: center;
+  font-weight: 300;
+}
+.error {
+  color: #ff676c;
+  text-align: center;
+}
