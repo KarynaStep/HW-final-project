@@ -13,7 +13,6 @@ socials.set(
   "http://127.0.0.1:5500/assetes/icons/instagram_icon.svg"
 );
 
-
 fetch("http://127.0.0.1:5500/assetes/js/data.json")
   .then((response) => response.json())
   .then((actors) => {
@@ -28,11 +27,12 @@ fetch("http://127.0.0.1:5500/assetes/js/data.json")
       item.addEventListener(
         "click",
         ({ target }) => {
-          target.localName === "ul"
-            ? false
-            : createNameLikeActor(target);
+          if (target.localName !== "ul")
+            checkingPresenceChooseName(target)
+              ? createNameLikeActor(target)
+              : false;
         },
-        { once: true }
+        // { once: true }
       );
     }
   })
@@ -47,9 +47,9 @@ fetch("http://127.0.0.1:5500/assetes/js/data.json")
 
 
 /**
- * 
- * @param {object} actor 
- * @returns 
+ *
+ * @param {object} actor
+ * @returns
  */
 function createActorItem({ firstName, lastName, profilePicture, contacts }) {
   const link = contacts.map((contact) => {
@@ -98,18 +98,39 @@ function createActorItem({ firstName, lastName, profilePicture, contacts }) {
   return li;
 }
 
+
 /**
- * 
+ *
  * @param {object} event.target
  */
 function createNameLikeActor(target) {
-  const nameActor = createElement("p", {}, getNameActor(target));
-  const li = createElement("li", { classNames: ["li-like-actor"] }, nameActor);
+  const nameActor = createElement(
+    "p",
+    { classNames: ["actor-name-choose"] },
+    getNameActor(target)
+  );
+  const crossNameActor = createElement("img", {
+    classNames: ["img-cross"],
+    attributes: {
+      src: "http://127.0.0.1:5500/assetes/icons/cross.svg",
+    },
+  });
+  crossNameActor.addEventListener("click", (event) => {
+    event.target.parentNode.remove()
+  }
+  );
+  const li = createElement(
+    "li",
+    { classNames: ["li-like-actor"] },
+    nameActor,
+    crossNameActor
+  );
   choose.append(li);
 }
 
+
 /**
- * 
+ *
  * @param {object} event.target
  */
 function getNameActor(target) {
