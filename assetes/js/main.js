@@ -23,24 +23,26 @@ fetch("http://127.0.0.1:5500/assetes/js/data.json")
     const createActor = verifiedActors.map((actor) => createActorItem(actor));
     root.append(...createActor);
 
-    for (const item of createActor) {
-      item.addEventListener(
+    for (const chooseActor of createActor) {
+      chooseActor.addEventListener(
         "click",
         ({ target }) => {
-          if (target.localName !== "ul")
+          if (target.localName !== "ul") {
             checkingPresenceChooseName(target)
               ? createNameLikeActor(target)
               : false;
-        },
+          }
+        }
         // { once: true }
       );
     }
   })
   .catch((error) => {
     const textError = createElement(
-      "p",
+      "h3",
       { classNames: ["error"] },
-      "Data not received. Try again. " + error
+      `Data not received. Try again.
+      ${error}`
     );
     root.append(textError);
   });
