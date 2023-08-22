@@ -84,14 +84,14 @@ function getInitials(name) {
  
 /**
  *
- * @param {object} event.target
+ * @param {object} event.currentTarget
  */
-function checkingPresenceChooseName(target) {
+function checkingPresenceChooseName(currentTarget) {
   const pChoose = document.querySelectorAll(".actor-name-choose");
   for (const p of pChoose) {
-    if (getNameActor(target) === p.innerText) {
+    if (currentTarget.children[0].children[1].innerText === p.innerText) {
       return;
     }
   }
-  return true
+  createNameChooseActor(currentTarget);
 }

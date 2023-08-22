@@ -1,19 +1,6 @@
 "use strict";
-const socials = new Map();
-socials.set(
-  "www.facebook.com",
-  "http://127.0.0.1:5500/assetes/icons/facebook_icon.svg"
-);
-socials.set(
-  "twitter.com",
-  "http://127.0.0.1:5500/assetes/icons/twitter_icon.svg"
-);
-socials.set(
-  "www.instagram.com",
-  "http://127.0.0.1:5500/assetes/icons/instagram_icon.svg"
-);
 
-fetch("http://127.0.0.1:5500/assetes/js/data.json")
+fetch("./assetes/js/data.json")
   .then((response) => response.json())
   .then((actors) => {
     const verifiedActors = actors.filter(
@@ -22,20 +9,7 @@ fetch("http://127.0.0.1:5500/assetes/js/data.json")
 
     const createActor = verifiedActors.map((actor) => createActorItem(actor));
     root.append(...createActor);
-
-    for (const chooseActor of createActor) {
-      chooseActor.addEventListener(
-        "click",
-        ({ target }) => {
-          if (target.localName !== "ul") {
-            checkingPresenceChooseName(target)
-              ? createNameLikeActor(target)
-              : false;
-          }
-        }
-        // { once: true }
-      );
-    }
+    
   })
   .catch((error) => {
     const textError = createElement(
@@ -96,31 +70,44 @@ function createActorItem({ firstName, lastName, profilePicture, contacts }) {
   });
 
   const article = createElement("article", {}, divPhoto, h3, divLink);
-  const li = createElement("li", { classNames: ["actor-card"] }, article);
+
+  const li = createElement(
+    "li",
+    {
+      classNames: ["actor-card"],
+      events: {
+        click: ({currentTarget}) => {
+          checkingPresenceChooseName(currentTarget)
+        },
+      },
+    },
+    article
+  );
   return li;
 }
 
 
 /**
  *
- * @param {object} event.target
+ * @param {object} event.currentTarget
  */
-function createNameLikeActor(target) {
+function createNameChooseActor(currentTarget) {
   const nameActor = createElement(
     "p",
     { classNames: ["actor-name-choose"] },
-    getNameActor(target)
+    currentTarget.children[0].children[1].innerText
   );
   const crossNameActor = createElement("img", {
     classNames: ["img-cross"],
     attributes: {
-      src: "http://127.0.0.1:5500/assetes/icons/cross.svg",
+      src: "./assetes/icons/cross.svg",
+    },
+    events: {
+      click: ({ target }) => {
+        target.parentNode.remove();
+      },
     },
   });
-  crossNameActor.addEventListener("click", (event) => {
-    event.target.parentNode.remove()
-  }
-  );
   const li = createElement(
     "li",
     { classNames: ["li-like-actor"] },
@@ -128,32 +115,4 @@ function createNameLikeActor(target) {
     crossNameActor
   );
   choose.append(li);
-}
-
-
-/**
- *
- * @param {object} event.target
- */
-function getNameActor(target) {
-  if (target.localName === "article") {
-    return target.children[1].innerText;
-  }
-  if (
-    target.className === "actor-photo" ||
-    target.className === "actor-initials"
-  ) {
-    return target.parentNode.parentNode.children[1].innerText;
-  }
-  if (
-    target.className === "div-link-socials" ||
-    target.className === "div-photo"
-  ) {
-    return target.parentNode.children[1].innerText;
-  }
-  if (target.className === "actor-card") {
-    return target.firstChild.children[1].innerText;
-  } else {
-    return target.innerText;
-  }
 }
