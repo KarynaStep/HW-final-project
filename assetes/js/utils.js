@@ -82,3 +82,16 @@ function getInitials(name) {
    }
 }
  
+/**
+ *
+ * @param {object} event.currentTarget
+ */
+function checkingPresenceChooseName(currentTarget) {
+  const pChoose = document.querySelectorAll(".actor-name-choose");
+  for (const p of pChoose) {
+    if (currentTarget.children[0].children[1].innerText === p.innerText) {
+      return;
+    }
+  }
+  createNameChooseActor(currentTarget);
+}
