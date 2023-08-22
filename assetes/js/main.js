@@ -89,7 +89,7 @@ function createActorItem({ firstName, lastName, profilePicture, contacts }) {
 
 /**
  *
- * @param {object} event.currentTarget
+ * @param {object} 
  */
 function createNameChooseActor(currentTarget) {
   const nameActor = createElement(
