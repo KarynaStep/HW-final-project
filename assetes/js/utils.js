@@ -82,11 +82,11 @@ function getInitials(name) {
    }
 }
  
-/**
+/** Checks if this actor is in the ul choose
  *
  * @param {object} event.currentTarget
  */
-function checkingPresenceChooseName(currentTarget) {
+function checkPresenceChooseName(currentTarget) {
   const pChoose = document.querySelectorAll(".actor-name-choose");
   for (const p of pChoose) {
     if (currentTarget.children[0].children[1].innerText === p.innerText) {

@@ -22,7 +22,7 @@ fetch("./assetes/js/data.json")
   });
 
 
-/**
+/** Creating actor cards
  *
  * @param {object} actor
  * @returns
@@ -77,7 +77,7 @@ function createActorItem({ firstName, lastName, profilePicture, contacts }) {
       classNames: ["actor-card"],
       events: {
         click: ({currentTarget}) => {
-          checkingPresenceChooseName(currentTarget)
+          checkPresenceChooseName(currentTarget)
         },
       },
     },
@@ -86,10 +86,9 @@ function createActorItem({ firstName, lastName, profilePicture, contacts }) {
   return li;
 }
 
-
-/**
+/** Add the selected actors to the ul choose
  *
- * @param {object} 
+ * @param {object} event.currentTarget
  */
 function createNameChooseActor(currentTarget) {
   const nameActor = createElement(
